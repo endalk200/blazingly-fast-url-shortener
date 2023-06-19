@@ -47,10 +47,9 @@ func InitializeStore() *StorageService {
 }
 
 /*
-	We want to be able to save the mapping between the originalUrl
-
-and the generated shortUrl url
-*/
+* We want to be able to save the mapping between the originalUrl
+* and the generated shortUrl url
+ */
 func SaveUrlMapping(shortUrl string, originalUrl string, userId string) {
 	err := storeService.redisClient.Set(ctx, shortUrl, originalUrl, CacheDuration).Err()
 
@@ -70,6 +69,16 @@ func RetrieveInitialUrl(shortUrl string) string {
 
 	if err != nil {
 		panic(fmt.Sprintf("Failed RetrieveInitialUrl url | Error: %v - shortUrl: %s\n", err, shortUrl))
+	}
+
+	return result
+}
+
+func GetUrls() []string {
+	result, err := storeService.redisClient.Keys(ctx, "*").Result()
+
+	if err != nil {
+		panic(fmt.Sprintf("Failed GetUrls url | Error: %v\n", err))
 	}
 
 	return result

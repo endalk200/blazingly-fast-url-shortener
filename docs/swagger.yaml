@@ -1,0 +1,94 @@
+basePath: /
+definitions:
+  handler.UrlCreationRequest:
+    properties:
+      long_url:
+        type: string
+      user_id:
+        type: string
+    required:
+    - long_url
+    - user_id
+    type: object
+host: localhost:9808
+info:
+  contact:
+    email: eb808826@gmail.com
+    name: endalk200
+  description: Blazingly Fast URL Shortener API written in Go using Gin framework.
+  title: Blazingly Fast URL Shortener API
+  version: "1.0"
+paths:
+  /{shortUrl}:
+    get:
+      description: Redirect to initial url
+      parameters:
+      - description: short url
+        in: path
+        name: shortUrl
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: short url created successfully
+          schema:
+            type: string
+      summary: Redirect to initial url
+      tags:
+      - urls
+  /urls:
+    get:
+      description: Get all short urls
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: short url created successfully
+          schema:
+            type: string
+      summary: Get all short urls
+      tags:
+      - urls
+    post:
+      consumes:
+      - application/json
+      description: Create a short url
+      parameters:
+      - description: Url Creation
+        in: body
+        name: urlCreationRequest
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UrlCreationRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: short url created successfully
+          schema:
+            type: string
+      summary: Create a short url
+      tags:
+      - urls
+  /urls/{shortUrl}:
+    get:
+      description: Get a short url
+      parameters:
+      - description: short url
+        in: path
+        name: shortUrl
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: short url created successfully
+          schema:
+            type: string
+      summary: Get a short url
+      tags:
+      - urls
+swagger: "2.0"

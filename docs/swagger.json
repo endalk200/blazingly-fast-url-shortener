@@ -1,0 +1,143 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Blazingly Fast URL Shortener API written in Go using Gin framework.",
+        "title": "Blazingly Fast URL Shortener API",
+        "contact": {
+            "name": "endalk200",
+            "email": "eb808826@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:9808",
+    "basePath": "/",
+    "paths": {
+        "/urls": {
+            "get": {
+                "description": "Get all short urls",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "urls"
+                ],
+                "summary": "Get all short urls",
+                "responses": {
+                    "200": {
+                        "description": "short url created successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a short url",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "urls"
+                ],
+                "summary": "Create a short url",
+                "parameters": [
+                    {
+                        "description": "Url Creation",
+                        "name": "urlCreationRequest",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.UrlCreationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "short url created successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/urls/{shortUrl}": {
+            "get": {
+                "description": "Get a short url",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "urls"
+                ],
+                "summary": "Get a short url",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "short url",
+                        "name": "shortUrl",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "short url created successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/{shortUrl}": {
+            "get": {
+                "description": "Redirect to initial url",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "urls"
+                ],
+                "summary": "Redirect to initial url",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "short url",
+                        "name": "shortUrl",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "short url created successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "handler.UrlCreationRequest": {
+            "type": "object",
+            "required": [
+                "long_url",
+                "user_id"
+            ],
+            "properties": {
+                "long_url": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

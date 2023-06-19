@@ -1,0 +1,27 @@
+
+### GET /
+GET / HTTP/1.1
+Host: localhost:9808
+
+### GET /urls
+GET /urls HTTP/1.1
+Host: localhost:9808
+
+### POST /urls
+POST /urls HTTP/1.1
+Host: localhost:9808
+Content-Type: application/json
+
+{
+    "long_url": "https://github.com/search?q=blazingly-fast-url-shortener&type=repositories",
+    "user_id": "e0dba740-fc4b-4977-872c-d360239e6b10"
+}
+
+
+### /urls/:id
+GET /urls/6Yr1b2DW HTTP/1.1
+Host: localhost:9808
+
+### /:short_url
+GET /6Yr1b2DW HTTP/1.1
+Host: localhost:9808
